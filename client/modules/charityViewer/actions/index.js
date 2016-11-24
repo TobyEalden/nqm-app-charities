@@ -6,7 +6,7 @@ export default {
     addCounty({store}, countyId) {
       store.dispatch(reduxActions.addCounty(countyId));
     },
-    removeCounty({store, FlowRouter}, countyId) {
+    removeCounty({store}, countyId) {
       store.dispatch(reduxActions.removeCounty(countyId));
     },
   },
