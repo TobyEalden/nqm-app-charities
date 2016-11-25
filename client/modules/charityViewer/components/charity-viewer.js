@@ -21,16 +21,20 @@ class CharityViewer extends React.Component {
       },
       filter: {
         position: "fixed",
-        left: 0,
+        left: 200,
         top: 200,
         zIndex: 999,
       },
     };
 
+    let filter = {};
+    if (this.props.charityTypes.length > 0) filter.classes_names = {"$in": this.props.charityTypes};
+    if (this.props.counties.length > 0) filter.countyIds = {"$in": this.props.counties};
+
     return (
       <div style={this.props.style}>
         <LeafletMap style={styles.map} resourceId="S1xF2A9rfe" />
-        <CharityList style={styles.list} resourceId="Hkx-11oBGl" filter={{"countyIds": {"$in": this.props.counties}}} />
+        <CharityList style={styles.list} resourceId="Hkx-11oBGl" filter={filter} />
         <CharityFilter style={styles.filter} resourceId="Hkx-11oBGl" />
       </div>
     );

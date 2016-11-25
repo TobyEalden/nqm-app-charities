@@ -8,9 +8,15 @@ class CharityList extends React.Component {
       return <ListItem key={charity.name} primaryText={charity.name} />;
     });
 
+    const styles = {
+      list: {
+        fontSize: "75%",
+      },
+    };
+
     return (
       <div style={this.props.style}>
-        <List>
+        <List styles={styles.list} >
           {charities}
         </List>
       </div>

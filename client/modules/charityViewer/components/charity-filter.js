@@ -10,18 +10,28 @@ class CharityFilter extends React.Component {
 
   render() {
     const typeList = _.map(this.props.charityClasses, (charityClass) => {
+      const active = {
+        color: this.props.charityTypes.indexOf(charityClass) !== -1 ? "#0000FF" : "#000000",
+      };
       return (
         <ListItem
           key={charityClass}
           primaryText={charityClass}
           onTouchTap={this.toggleType.bind(this, charityClass)}
+          style={active}
         />
       );
     });
 
+    const styles = {
+      list: {
+        fontSize: "75%",
+      },
+    };
+
     return (
       <div style={this.props.style}>
-        <List>
+        <List style={styles.list} >
           {typeList}
         </List>
       </div>
