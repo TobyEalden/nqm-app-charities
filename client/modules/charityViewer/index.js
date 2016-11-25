@@ -1,11 +1,11 @@
 import actions from "./actions";
-import * as reducer from "./configs/reducer";
+import * as reducers from "./configs/reducers";
 import routes from "./routes";
 
 export default {
   routes,
   actions,
-  reducer,
+  reducers,
   load(/*context*/) {
     // Put module initialisation here.
   }

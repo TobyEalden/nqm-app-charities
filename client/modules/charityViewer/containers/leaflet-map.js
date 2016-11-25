@@ -5,6 +5,7 @@ import TDXApi from "nqm-api-tdx";
 
 // Loads the parent resource from the TDX.
 function dataMapper({connectionManager, resourceId}, onData) {
+  console.log(resourceId);
   const config = {
     commandHost: Meteor.settings.public.commandHost || "https://cmd.nq-m.com",
     queryHost: Meteor.settings.public.queryHost || "https://q.nq-m.com",
@@ -13,7 +14,10 @@ function dataMapper({connectionManager, resourceId}, onData) {
   const api = new TDXApi(config);
 
   api.getDatasetData(resourceId, null, null, {limit: 1000}, (err, response) => {
-    if (err) console.log("Could not get geojson: ", err.message);
+    if (err) {
+      console.log("Could not get geojson: ", err.message);
+      console.log(err);
+    }
     else onData(null, {geojson: response.data});
   });
 }

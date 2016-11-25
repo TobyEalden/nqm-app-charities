@@ -23,7 +23,7 @@ export default function(injectDeps, context, actions) {   // eslint-disable-line
     action() {
       mount(LayoutCtx, {
         title: "home",
-        content: (contentStyle) => (<LeafletMap style={contentStyle} />),
+        content: (contentStyle) => (<LeafletMap style={contentStyle} resourceId="S1eFb7IEzg" />),
         sideBarContent: AppSideBar,
       });
     },
