@@ -26,9 +26,9 @@ class AppMenu extends React.Component {
     },
     {},
     {
-      text: "Modal",
+      text: "List",
       icon: "help",
-      route: "modal",
+      route: "list",
     },
   ]
   static contextTypes = {

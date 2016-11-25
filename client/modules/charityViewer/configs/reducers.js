@@ -1,13 +1,20 @@
-import {ADD_CNTY, REMOVE_CNTY} from "../actions/action-types";
+import {ADD_CNTY, REMOVE_CNTY, ADD_CHARITY_TYPE, REMOVE_CHARITY_TYPE} from "../actions/action-types";
 
-export function charityViewer(state = {counties: []}, action) {
+export function charityViewer(state = {counties: [], charityTypes: []}, action) {
   switch (action.type) {
     case ADD_CNTY:
       return Object.assign({}, state, {counties: [...state.counties, action.countyId]});
     case REMOVE_CNTY:
-      const indexToRemove = state.counties.indexOf(action.countyId);
+      const countyToRemove = state.counties.indexOf(action.countyId);
       return Object.assign({}, state, {
-        counties: [...state.counties.slice(0, indexToRemove), ...state.counties.slice(indexToRemove + 1)]
+        counties: [...state.counties.slice(0, countyToRemove), ...state.counties.slice(countyToRemove + 1)],
+      });
+    case ADD_CHARITY_TYPE:
+      return Object.assign({}, state, {charityTypes: [...state.charityTypes, action.charityType]});
+    case REMOVE_CHARITY_TYPE:
+      const typeToRemove = state.charityTypes.indexOf(action.charityType);
+      return Object.assign({}, state, {
+        charityTypes: [...state.charityTypes.slice(0, typeToRemove), ...state.charityTypes.slice(typeToRemove + 1)],
       });
     default:
       return state;

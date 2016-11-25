@@ -1,2 +1,4 @@
 export const ADD_CNTY = "ADD_CNTY";
 export const REMOVE_CNTY = "REMOVE_CNTY";
+export const ADD_CHARITY_TYPE = "ADD_CHARITY_TYPE";
+export const REMOVE_CHARITY_TYPE = "REMOVE_CHARITY_TYPE";

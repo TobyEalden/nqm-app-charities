@@ -9,5 +9,11 @@ export default {
     removeCounty({store}, countyId) {
       store.dispatch(reduxActions.removeCounty(countyId));
     },
+    addCharityType({store}, charityType) {
+      store.dispatch(reduxActions.addCharityType(charityType));
+    },
+    removeCharityType({store}, charityType) {
+      store.dispatch(reduxActions.removeCharityType(charityType));
+    },
   },
 };

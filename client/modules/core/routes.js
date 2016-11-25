@@ -3,7 +3,7 @@ import {mount} from "react-mounter";
 import framework from "nqm-app-framework";
 
 // Application pages
-import LeafletMap from "../charityViewer/containers/leaflet-map";
+import CharityViewer from "../charityViewer/containers/charity-viewer";
 import Modal from "../core/containers/modal";
 
 // Application sidebar
@@ -23,7 +23,7 @@ export default function(injectDeps, context, actions) {   // eslint-disable-line
     action() {
       mount(LayoutCtx, {
         title: "home",
-        content: (contentStyle) => (<LeafletMap style={contentStyle} resourceId="S1eFb7IEzg" />),
+        content: (contentStyle) => (<CharityViewer style={contentStyle}/>),
         sideBarContent: AppSideBar,
       });
     },
