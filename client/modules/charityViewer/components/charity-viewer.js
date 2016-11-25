@@ -28,8 +28,8 @@ class CharityViewer extends React.Component {
     };
 
     let filter = {};
-    if (this.props.charityTypes.length > 0) filter.classes_names = {"$in": this.props.charityTypes};
-    if (this.props.counties.length > 0) filter.countyIds = {"$in": this.props.counties};
+    if (this.props.charityTypes.length > 0) filter.classes_names = {"$all": this.props.charityTypes};
+    if (this.props.counties.length > 0) filter.countyIds = {"$all": this.props.counties};
 
     return (
       <div style={this.props.style}>

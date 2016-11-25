@@ -12,7 +12,7 @@ function dataMapper({connectionManager, resourceId, filter}, onData) {
   };
   const api = new TDXApi(config);
 
-  api.getDatasetData(resourceId, filter, null, {limit: 50}, (err, response) => {
+  api.getDatasetData(resourceId, filter, null, {limit: 50, sort: {employees: -1}}, (err, response) => {
     if (err) console.log("Could not get charity data: ", err.message);
     else onData(null, {charities: response.data});
   });
