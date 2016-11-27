@@ -1,5 +1,6 @@
 import {createApp} from "mantra-core";
 import {combineReducers} from "redux";
+import {routerReducer} from "react-router-redux";
 import framework from "nqm-app-framework";
 import initContext from "./configs/context";
 
@@ -13,6 +14,7 @@ const reducer = combineReducers({
   ...frameworkModule.reducers,
   ...coreModule.reducers,
   ...charityModule.reducers,
+  routing: routerReducer,
 });
 
 // init context

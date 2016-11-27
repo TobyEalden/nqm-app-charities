@@ -1,5 +1,7 @@
 import React from "react";
-import {mount} from "react-mounter";
+import ReactDOM from "react-dom";
+import {Router, Route, IndexRoute, browserHistory} from "react-router";
+import {syncHistoryWithStore} from "react-router-redux";
 import framework from "nqm-app-framework";
 
 // Application pages
@@ -12,29 +14,26 @@ import AppSideBar from "./components/app-side-bar";
 // Get layout components from the framework
 const Layout = framework.ui.Layout;
 const ModalLayout = framework.ui.ModalLayout;
+const NotFound = framework.ui.NotFound;
 
-export default function(injectDeps, context, actions) {   // eslint-disable-line no-unused-vars
-  const {FlowRouter} = context;
-  const LayoutCtx = injectDeps(Layout);
-  const ModalLayoutCtx = injectDeps(ModalLayout);
+export default function(injectDeps, context) {
+  const {store} = context;
+  const history = syncHistoryWithStore(browserHistory, store);
 
-  FlowRouter.route("/", {
-    name: "root",
-    action() {
-      mount(LayoutCtx, {
-        title: "home",
-        content: (contentStyle) => (<CharityViewer style={contentStyle}/>),
-        sideBarContent: AppSideBar,
-      });
-    },
-  });
+  const RouterCtx = () => (
+    <Router history={history}>
+      <Route title="home" path="/" component={Layout}>
+        <IndexRoute components={{content: CharityViewer, sideBarContent: AppSideBar}} />
+      </Route>
+      <Route path="/modal" title="modal" component={ModalLayout}>
+        <IndexRoute components={{content: Modal}} />
+      </Route>
+      <Route path="*" component={NotFound} />
+    </Router>
+  );
 
-  FlowRouter.route("/modal", {
-    name: "modal",
-    action() {
-      mount(ModalLayoutCtx, {
-        content: () => (<Modal title="about" />),
-      });
-    },
-  });
+  ReactDOM.render(
+    React.createElement(injectDeps(RouterCtx)),
+    document.getElementById("render-root")
+  );
 }

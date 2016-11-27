@@ -24,7 +24,7 @@ class LeafletMap extends React.Component {
 
   styleGeojson(feature) {
     const countyId = feature.properties.CTYUA15CD;
-    const opacity = (feature.properties.totalCharities/100 > 1) ? 0.5 : feature.properties.totalCharities/200;
+    const opacity = (feature.properties.totalCharities / 100 > 1) ? 0.5 : feature.properties.totalCharities / 200;
     if (this.props.counties.indexOf(countyId) !== -1) return {color: "#0000FF", weight: 3, fillOpacity: opacity};
     else return {color: "#0000FF", weight: 1, fillOpacity: opacity};
   }
@@ -35,7 +35,7 @@ class LeafletMap extends React.Component {
     const url = `https://api.tiles.mapbox.com/v4/${leafletUsername}/{z}/{x}/{y}.png?access_token=${leafletPassword}`;
 
     return (
-      <div style={this.props.style}>
+      <div className={this.props.className}>
         <Map center={[54.251186, -4.463196]} zoom={6} >
           <TileLayer
             url={url}
@@ -55,10 +55,10 @@ class LeafletMap extends React.Component {
 
 LeafletMap.propTypes = {
   addCounty: React.PropTypes.func,
+  className: React.PropTypes.string.isRequired,
   counties: React.PropTypes.array,
   geojson: React.PropTypes.array.isRequired,
   removeCounty: React.PropTypes.func,
-  style: React.PropTypes.object.isRequired,
 };
 
 export default LeafletMap;

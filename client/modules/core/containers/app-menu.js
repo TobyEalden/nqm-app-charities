@@ -2,14 +2,10 @@ import {dataLoader} from "nqm-app-framework";
 import AppMenu from "../components/app-menu";
 
 export const stateMapper = (state) => ({
-  activeItem: state.navigation.active,
 });
 
-export const depsMapper = (context, actions) => ({
+export const depsMapper = (context) => ({
   store: context.store,
-  connectionManager: context.connectionManager,
-  FlowRouter: context.FlowRouter,
-  go: actions.navigation.go,
 });
 
 export default dataLoader.merge(

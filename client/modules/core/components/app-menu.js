@@ -1,6 +1,7 @@
 import React from "react";
 import injectSheet from "react-jss";
 import _ from "lodash";
+import {browserHistory} from "react-router";
 
 import {List, ListItem} from "material-ui/List";
 import Divider from "material-ui/Divider";
@@ -22,20 +23,21 @@ class AppMenu extends React.Component {
     {
       text: "Home",
       icon: "home",
-      route: "root",
+      route: "/",
     },
     {},
     {
-      text: "List",
+      text: "Modal",
       icon: "help",
-      route: "list",
+      route: "/modal",
     },
   ]
   static contextTypes = {
     muiTheme: React.PropTypes.object,
+    router: React.PropTypes.object,
   }
   onMenuItem(route) {
-    this.props.go(route);
+    browserHistory.push(route);
   }
   render() {
     const activeItemStyle = {
@@ -45,9 +47,9 @@ class AppMenu extends React.Component {
     };
 
     const menuItems = _.map(AppMenu.menuData, (itemData, idx) => {
-      const active = itemData.route === this.props.activeItem;
-      const itemStyle = active ? activeItemStyle : styles.itemStyle;
       if (itemData.text) {
+        const active = this.context.router.isActive(itemData.route);
+        const itemStyle = active ? activeItemStyle : styles.itemStyle;
         return (
           <ListItem
             key={idx}

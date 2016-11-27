@@ -1,5 +1,12 @@
 import React from "react/react";
 import {List, ListItem} from "material-ui/List";
+import injectSheet from "react-jss";
+
+const styles = {
+  list: {
+    fontSize: "75%",
+  },
+};
 
 class CharityFilter extends React.Component {
 
@@ -9,6 +16,7 @@ class CharityFilter extends React.Component {
   }
 
   render() {
+    const {sheet: {classes}} = this.props;
     const typeList = _.map(this.props.charityClasses, (charityClass) => {
       const active = {
         color: this.props.charityTypes.indexOf(charityClass) !== -1 ? "#0000FF" : "#000000",
@@ -23,15 +31,9 @@ class CharityFilter extends React.Component {
       );
     });
 
-    const styles = {
-      list: {
-        fontSize: "75%",
-      },
-    };
-
     return (
-      <div style={this.props.style}>
-        <List style={styles.list} >
+      <div className={this.props.className}>
+        <List className={classes.list} >
           {typeList}
         </List>
       </div>
@@ -43,8 +45,9 @@ CharityFilter.propTypes = {
   addCharityType: React.PropTypes.func.isRequired,
   charityClasses: React.PropTypes.array.isRequired,
   charityTypes: React.PropTypes.array.isRequired,
+  className: React.PropTypes.string.isRequired,
   removeCharityType: React.PropTypes.func.isRequired,
-  style: React.PropTypes.object.isRequired,
+  sheet: React.PropTypes.object.isRequired,
 };
 
-export default CharityFilter;
+export default injectSheet(styles)(CharityFilter);

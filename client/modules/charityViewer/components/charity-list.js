@@ -1,22 +1,23 @@
 import React from "react";
+import injectSheet from "react-jss";
 import {List, ListItem} from "material-ui/List";
 
-class CharityList extends React.Component {
+const styles = {
+  list: {
+    fontSize: "75%",
+  },
+};
 
+class CharityList extends React.Component {
   render() {
+    const {sheet: {classes}} = this.props;
     const charities = _.map(this.props.charities, (charity) => {
       return <ListItem key={charity.name} primaryText={charity.name} />;
     });
 
-    const styles = {
-      list: {
-        fontSize: "75%",
-      },
-    };
-
     return (
-      <div style={this.props.style}>
-        <List styles={styles.list} >
+      <div className={this.props.className}>
+        <List className={classes.list} >
           {charities}
         </List>
       </div>
@@ -26,7 +27,8 @@ class CharityList extends React.Component {
 
 CharityList.propTypes = {
   charities: React.PropTypes.array.isRequired,
-  style: React.PropTypes.object.isRequired,
+  className: React.PropTypes.string.isRequired,
+  sheet: React.PropTypes.object.isRequired,
 };
 
-export default CharityList;
+export default injectSheet(styles)(CharityList);
